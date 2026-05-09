@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="基于多模态图像信息融合的无人机跟踪算法设计 — 北京科技大学自动化学院本科毕业论文项目主页">
+  <meta name="keywords" content="UAV tracking, anti-UAV, multi-modal fusion, RGB-IR, visibility-aware, USTB">
+  <title>MoVATrack · 多模态无人机跟踪 | 北京科技大学</title>
+
+  <!-- Bulma CSS (Nerfies-template-inspired) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <!-- Optional Google Font for serif titles (optional, falls back gracefully) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700&family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- ====================== HERO ====================== -->
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop has-text-centered">
+
+      <h1 class="title publication-title">
+        基于多模态图像信息融合的无人机跟踪算法设计
+      </h1>
+      <p class="subtitle is-5 publication-title-en">
+        Design of Unmanned Aerial Vehicle Tracking Algorithm
+        Based on Multi-modal Image Information Fusion
+      </p>
+
+      <!-- ===== Author block ===== -->
+      <div class="is-size-5 publication-authors">
+        <span class="author-block">
+          <strong>金子杰</strong>
+          <span class="author-en">(Zijie Jin)</span><sup>1</sup>
+        </span>
+      </div>
+      <div class="is-size-6 publication-authors mt-2">
+        <span class="author-block has-text-grey">
+          指导教师：<strong>李擎 教授</strong>
+          <span class="author-en">(Prof. Qing Li)</span><sup>1</sup>
+        </span>
+      </div>
+      <div class="is-size-6 publication-authors mt-2">
+        <span class="author-block">
+          <sup>1</sup>
+          <strong style="color:#003E8C;">北京科技大学</strong>
+          自动化学院
+        </span>
+      </div>
+      <div class="is-size-7 publication-authors has-text-grey mt-1">
+        University of Science and Technology Beijing,
+        School of Automation and Electrical Engineering
+      </div>
+      <div class="is-size-7 publication-authors has-text-grey mt-2">
+        本科毕业设计（论文） · 2026 届
+      </div>
+
+      <!-- ===== Badges row ===== -->
+      <div class="publication-links mt-5">
+        <span class="link-block">
+          <span class="external-link button is-normal is-rounded is-static" title="论文修订完成后公开">
+            <span class="icon"><i class="fas fa-file-pdf"></i></span>
+            <span>论文 PDF · 即将公开</span>
+          </span>
+        </span>
+        <span class="link-block">
+          <span class="external-link button is-normal is-rounded is-static" title="代码整理完成后开源">
+            <span class="icon"><i class="fab fa-github"></i></span>
+            <span>代码 · 即将开源</span>
+          </span>
+        </span>
+        <span class="link-block">
+          <span class="external-link button is-normal is-rounded is-static" title="模型权重将随论文一同公开">
+            <span class="icon"><i class="fas fa-cube"></i></span>
+            <span>模型权重 · 即将公开</span>
+          </span>
+        </span>
+        <span class="link-block">
+          <a href="https://github.com/ZhaoJ9014/Anti-UAV" class="external-link button is-normal is-rounded is-dark" target="_blank" rel="noopener">
+            <span class="icon"><i class="fas fa-database"></i></span>
+            <span>数据集 (Anti-UAV)</span>
+          </a>
+        </span>
+        <span class="link-block">
+          <span class="external-link button is-normal is-rounded is-static" title="Hugging Face Space 部署中">
+            <span class="icon"><i class="fas fa-rocket"></i></span>
+            <span><b>在线 Demo · 即将上线</b></span>
+          </span>
+        </span>
+        <span class="link-block">
+          <a href="#bibtex" class="external-link button is-normal is-rounded is-dark">
+            <span class="icon"><i class="fas fa-quote-left"></i></span>
+            <span>引用</span>
+          </a>
+        </span>
+      </div>
+      <p class="is-size-7 has-text-grey mt-3">
+        <em>本页为本科毕业设计项目主页。论文与代码将在答辩后整理公开；
+        Demo 与模型权重计划于答辩前后部署。</em>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== TEASER VIDEO ====================== -->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <video poster="static/images/night_lowlight_poster.jpg" id="teaser" autoplay muted loop playsinline style="width:100%; border-radius:6px;">
+        <source src="static/videos/night_lowlight.mp4" type="video/mp4">
+      </video>
+      <p class="has-text-centered mt-3 has-text-grey is-size-6">
+        Night Low-light · 双模态实景跟踪。
+        左 = RGB 可见光（夜间几乎全黑） · 中 = IR 红外（目标清晰） · 右 = 实时可见性 HUD。
+        VAAF 模块在 RGB 模态退化时自动屏蔽 RGB 路径噪声、由 IR 单挑驱动跟踪。
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ====================== ABSTRACT ====================== -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract · 摘要</h2>
+        <div class="content has-text-justified">
+          <p>
+            本文针对无人机视觉跟踪任务面临的三类核心挑战——
+            <strong>多模态融合的可信度建模缺失</strong>、
+            <strong>模板表征对目标遮挡与模态退化的敏感性</strong>、
+            <strong>小目标短暂消失场景下的重检测能力不足</strong>——
+            以 SUTrack 单流跟踪框架为基础，分别在
+            <span class="has-text-link">架构</span> /
+            <span class="has-text-link">训练</span> /
+            <span class="has-text-link">推理</span>
+            三个层面提出三个核心模块。
+          </p>
+          <p>
+            本文方法在 Anti-UAV、Anti-UAV410、DUT Anti-UAV 与 CST Anti-UAV
+            四个公开无人机基准上系统验证。在 Anti-UAV 红外协议上相比 UAUTrack
+            在 SA、AUC、P@20、PNorm 四个核心指标上分别提升
+            <strong>1.91, 4.20, 4.43, 4.29</strong> 个百分点；
+            在 CST 极小目标基准上 SA(0.30) 达到
+            <strong style="color:#003E8C;">39.18</strong>，
+            超越当前公开最优方法 GlobalTrack 共
+            <strong>3.96</strong> 个百分点，是已知公开方法中首个在该基准上将
+            状态准确率突破 39.0 的算法。
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ====================== METHOD ====================== -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">方法概述 · Method Overview</h2>
+    <div class="content has-text-justified">
+      <p>
+        本文方法以 SUTrack 单流跟踪框架为基础，针对无人机视觉跟踪的三类核心挑战，
+        在<strong>架构 / 训练 / 推理</strong>三个层面分别引入三个互相独立又协同工作的核心模块：
+      </p>
+      <div class="columns is-multiline mt-2">
+        <div class="column is-one-third">
+          <div class="module-card">
+            <div class="module-tag">架构层</div>
+            <h4 class="module-title">VAAF</h4>
+            <p class="module-sub-zh">可见性自适应融合</p>
+            <p class="module-sub">Visibility-Aware Adaptive Fusion</p>
+            <ul class="module-list">
+              <li>三头可见性预测（RGB / IR / 目标）</li>
+              <li>可见性驱动的跨模态门控</li>
+              <li>分组正交低秩适配（GOLA）</li>
+            </ul>
+          </div>
+        </div>
+        <div class="column is-one-third">
+          <div class="module-card">
+            <div class="module-tag">训练层</div>
+            <h4 class="module-title">RMD</h4>
+            <p class="module-sub-zh">鲁棒模态蒸馏</p>
+            <p class="module-sub">Robust Modality Distillation</p>
+            <ul class="module-list">
+              <li>Cox 过程模板随机掩码</li>
+              <li>跨模态内容-风格双蒸馏</li>
+              <li>双向梯度耦合的协同训练</li>
+            </ul>
+          </div>
+        </div>
+        <div class="column is-one-third">
+          <div class="module-card">
+            <div class="module-tag">推理层</div>
+            <h4 class="module-title">MGTR</h4>
+            <p class="module-sub-zh">记忆引导跟踪与重检测</p>
+            <p class="module-sub">Memory-Guided Tracking &amp; Re-detection</p>
+            <ul class="module-list">
+              <li>八维卡尔曼运动建模</li>
+              <li>质量门控的回溯式记忆库</li>
+              <li>运动感知重排序与重检测</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ====================== SHOWCASE ====================== -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">演示视频 · 多模态实景跟踪</h2>
+    <p class="subtitle is-6 has-text-centered has-text-grey">
+      三段真实 Anti-UAV 测试序列上的本文完整方法运行结果。
+      每段视频左 = RGB 可见光 · 中 = IR 红外 · 右 = 实时可见性 HUD。
+      <br/>
+      <em class="is-size-7">
+        说明：Anti-UAV 数据集 RGB 与 IR 非像素对齐 (640×512 vs 1920×1080)，
+        模型仅在 IR 坐标系输出预测，RGB 黄色框为 GT 真值参考位置。
+      </em>
+    </p>
+
+    <div class="columns is-multiline">
+      <!-- Card 1: Day -->
+      <div class="column is-one-third">
+        <div class="show-card">
+          <h4 class="show-card-title">
+            白天清晰场景
+            <span class="show-card-tag">Day-clear</span>
+          </h4>
+          <p class="show-card-narr">
+            目标在白天清晰场景下被持续跟踪。两个模态都可靠，VAAF 给出接近平衡的融合权重。
+          </p>
+          <video controls preload="metadata" poster="static/images/day_clear_poster.jpg">
+            <source src="static/videos/day_clear.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <!-- Card 2: Dusk -->
+      <div class="column is-one-third">
+        <div class="show-card">
+          <h4 class="show-card-title">
+            黄昏 + 目标短暂消失
+            <span class="show-card-tag">MGTR demo</span>
+          </h4>
+          <p class="show-card-narr">
+            黄昏序列含目标短暂消失。注意可见性时序图：v_target 跌至 0 时跟踪器主动输出 ABSENT，
+            目标重新出现后由 MGTR 记忆库 + 卡尔曼运动先验快速重定位。
+          </p>
+          <video controls preload="metadata" poster="static/images/dusk_absent_poster.jpg">
+            <source src="static/videos/dusk_absent.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <!-- Card 3: Night -->
+      <div class="column is-one-third">
+        <div class="show-card">
+          <h4 class="show-card-title">
+            夜间低光 (VAAF 救场)
+            <span class="show-card-tag">VAAF rescue</span>
+          </h4>
+          <p class="show-card-narr">
+            夜间低光场景。RGB 通道几乎全黑，目标信息完全来自 IR 红外通道。
+            VAAF 通过 v_rgb 自动降低对 RGB 路径的吸收，跨模态门控有效压制 RGB 噪声注入。
+          </p>
+          <video controls preload="metadata" poster="static/images/night_lowlight_poster.jpg">
+            <source src="static/videos/night_lowlight.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ====================== A/B COMPARISON ====================== -->
+<section class="section" style="background:#f9fafb;">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">A/B 对比 · 模块价值演示</h2>
+    <p class="subtitle is-6 has-text-centered has-text-grey">
+      同一段序列上"完整方法"与"去掉某模块"的并排跟踪。
+      上半绿框 = 本文方法 · 下半红框 = 消融变体 · 右侧实时显示 IoU vs GT。
+    </p>
+
+    <div class="columns">
+      <div class="column is-half">
+        <div class="show-card">
+          <h4 class="show-card-title">
+            VAAF 价值演示
+            <span class="show-card-tag" style="background:#d62728;">Night Low-light</span>
+          </h4>
+          <p class="show-card-narr">
+            夜间 RGB 全黑、目标信息只来自 IR。<b>完整方法</b>（绿）的 v_rgb 自动收敛接近 0、
+            跨模态门控关闭对 RGB 的吸收，IoU 维持 0.89；<b>移除可见性头</b>后（红，a04 变体）
+            IR 路径仍接收 RGB 噪声，跟踪在帧 80 之后丢失目标，IoU 跌至 0。
+          </p>
+          <video controls preload="metadata" poster="static/images/ab_night_vaaf_poster.jpg">
+            <source src="static/videos/ab_night_vaaf.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <div class="column is-half">
+        <div class="show-card">
+          <h4 class="show-card-title">
+            MGTR 价值演示
+            <span class="show-card-tag" style="background:#d62728;">Dusk + Absence</span>
+          </h4>
+          <p class="show-card-narr">
+            黄昏序列含 30 个目标缺失帧。<b>完整方法</b>（绿）通过目标存在性头与质量门控记忆库
+            识别缺失，主动输出 'absent / no output'；<b>移除 MGTR 推理</b>后（红）跟踪器在缺失帧上
+            仍输出错误位置的 bbox（如 frame 110 的红色大框），属 SA 评测协议下的虚警。
+          </p>
+          <video controls preload="metadata" poster="static/images/ab_dusk_mgtr_poster.jpg">
+            <source src="static/videos/ab_dusk_mgtr.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ====================== QUANT RESULTS ====================== -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">实验结果 · Quantitative Results</h2>
+    <p class="subtitle is-6 has-text-centered has-text-grey">
+      在四个公开无人机基准上与现有代表性方法对比
+    </p>
+
+    <table class="table is-striped is-fullwidth result-table">
+      <thead>
+        <tr style="background:#f6f8fa; border-bottom:2px solid #003E8C;">
+          <th>Benchmark</th>
+          <th class="has-text-centered">Metric</th>
+          <th class="has-text-centered">SUTrack baseline</th>
+          <th class="has-text-centered">UAUTrack</th>
+          <th class="has-text-centered" style="color:#003E8C;">Ours (V+R+M)</th>
+          <th class="has-text-centered" style="color:#003E8C;">Δ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Anti-UAV TIR</td>
+          <td class="has-text-centered">SA</td>
+          <td class="has-text-centered">70.50</td>
+          <td class="has-text-centered">71.90</td>
+          <td class="has-text-centered"><b>73.81</b></td>
+          <td class="has-text-centered"><span class="has-text-success">+1.91</span></td>
+        </tr>
+        <tr>
+          <td>Anti-UAV RGB</td>
+          <td class="has-text-centered">SA</td>
+          <td class="has-text-centered">75.10</td>
+          <td class="has-text-centered">76.20</td>
+          <td class="has-text-centered"><b>77.47</b></td>
+          <td class="has-text-centered"><span class="has-text-success">+1.27</span></td>
+        </tr>
+        <tr>
+          <td>Anti-UAV410</td>
+          <td class="has-text-centered">SA</td>
+          <td class="has-text-centered">65.20</td>
+          <td class="has-text-centered">66.30</td>
+          <td class="has-text-centered"><b>67.07</b></td>
+          <td class="has-text-centered"><span class="has-text-success">+0.77</span></td>
+        </tr>
+        <tr style="background:#fff8e0;">
+          <td><b>CST Anti-UAV</b></td>
+          <td class="has-text-centered">SA(0.30)</td>
+          <td class="has-text-centered">32.10</td>
+          <td class="has-text-centered">35.92<small> (GlobalTrack)</small></td>
+          <td class="has-text-centered" style="color:#003E8C;"><b>39.18</b></td>
+          <td class="has-text-centered"><b><span class="has-text-success">+3.96</span></b></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="has-text-centered is-size-7 has-text-grey mt-2">
+      All numbers are based on the IR evaluation protocol unless otherwise noted.
+      DUT Anti-UAV (cross-domain RGB benchmark) results are reported in the paper.
+    </p>
+  </div>
+</section>
+
+
+<!-- ====================== BIBTEX ====================== -->
+<section class="section" id="bibtex">
+  <div class="container is-max-desktop content">
+    <h2 class="title is-3 has-text-centered">引用 · BibTeX</h2>
+    <pre><code>@thesis{jin2026autrack,
+  title  = {基于多模态图像信息融合的无人机跟踪算法设计},
+  author = {金子杰},
+  school = {北京科技大学 自动化学院},
+  type   = {本科毕业设计（论文）},
+  year   = {2026},
+  advisor= {李擎}
+}</code></pre>
+  </div>
+</section>
+
+
+<!-- ====================== FOOTER ====================== -->
+<footer class="footer">
+  <div class="container has-text-centered">
+    <p class="is-size-7 has-text-grey">
+      © 2026 金子杰 ·
+      <span style="color:#003E8C;">北京科技大学</span>
+      自动化学院 ·
+      指导教师：李擎 教授
+      <br/>
+      <span class="has-text-grey-light">
+        本科毕业设计（论文）项目主页 ·
+        页面模板参考 <a href="https://nerfies.github.io" target="_blank" rel="noopener">Nerfies</a>
+        · Built with Bulma CSS
+      </span>
+    </p>
+    <p class="is-size-7 has-text-grey-light mt-3">
+      <a href="https://github.com/jinzijie-bupt" target="_blank" rel="noopener" style="color:#888;">
+        <i class="fab fa-github"></i> github.com/jinzijie-bupt
+      </a>
+    </p>
+  </div>
+</footer>
+
+
+</body>
+</html>

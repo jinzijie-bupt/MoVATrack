@@ -1,0 +1,244 @@
+/* MoVATrack project page — Nerfies-template-inspired
+ * Based on Bulma CSS with academic minimalist tweaks
+ * USTB blue accent: #003E8C
+ */
+
+body {
+    font-family: 'Source Sans Pro', 'PingFang SC', 'Hiragino Sans GB',
+                 'Microsoft YaHei', sans-serif;
+    background: #ffffff;
+    color: #1a1a1a;
+}
+
+/* ===== Hero / Title ===== */
+.publication-title {
+    font-family: 'Noto Serif SC', 'PingFang SC', serif !important;
+    font-weight: 700 !important;
+    font-size: 2.1rem !important;
+    line-height: 1.45 !important;
+    color: #1a1a1a !important;
+    margin-bottom: 0.4rem !important;
+}
+.publication-title-en {
+    font-style: italic;
+    color: #666;
+    font-size: 1.05rem !important;
+    margin-bottom: 1.5rem !important;
+    font-weight: 400;
+}
+.publication-authors {
+    margin-bottom: 0;
+}
+.publication-authors .author-block {
+    margin: 0 0.4em;
+    color: #1a1a1a;
+}
+.publication-authors .author-en {
+    color: #888;
+    font-size: 0.9em;
+    margin-left: 0.2em;
+}
+.publication-authors sup {
+    color: #003E8C;
+    font-weight: 600;
+}
+
+/* ===== Badges ===== */
+.publication-links {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+.publication-links .button {
+    font-weight: 600 !important;
+    background: #1a1a1a !important;
+    color: #ffffff !important;
+    border: 1px solid #1a1a1a !important;
+    transition: opacity 0.2s, transform 0.1s;
+    padding-left: 1.2em;
+    padding-right: 1.2em;
+}
+.publication-links .button.is-link {
+    background: #003E8C !important;
+    border-color: #003E8C !important;
+}
+.publication-links .button:hover {
+    opacity: 0.85;
+    transform: translateY(-1px);
+}
+
+/* ===== Section headings ===== */
+.title.is-3 {
+    color: #1a1a1a;
+    font-weight: 600 !important;
+    border-bottom: 2px solid #003E8C;
+    padding-bottom: 0.5rem;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.section .title.is-3 {
+    margin-bottom: 1.5rem !important;
+}
+
+/* ===== Method modules ===== */
+.module-card {
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 1.5rem 1.25rem;
+    background: #fafbfc;
+    height: 100%;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.module-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 62, 140, 0.10);
+}
+.module-tag {
+    display: inline-block;
+    background: #003E8C;
+    color: #ffffff;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 12px;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.6rem;
+}
+.module-title {
+    font-size: 1.5rem !important;
+    font-weight: 700 !important;
+    color: #003E8C !important;
+    margin: 0 0 0.2rem 0 !important;
+    font-family: 'Source Sans Pro', sans-serif !important;
+}
+.module-sub-zh {
+    font-size: 1.0rem;
+    color: #1a1a1a;
+    font-weight: 600;
+    margin: 0 0 0.1rem 0 !important;
+}
+.module-sub {
+    font-size: 0.85rem;
+    color: #666;
+    font-style: italic;
+    margin: 0 0 0.8rem 0 !important;
+}
+
+/* Static (placeholder) badge — no link, gray */
+.publication-links .button.is-static {
+    background: #e8e8eb !important;
+    color: #6b6b6b !important;
+    border: 1px solid #d0d0d3 !important;
+    cursor: not-allowed;
+    pointer-events: none;
+    box-shadow: none;
+}
+.publication-links .button.is-static:hover {
+    opacity: 1;
+    transform: none;
+}
+.module-list {
+    margin: 0 !important;
+    padding-left: 1.2em !important;
+    list-style: disc !important;
+}
+.module-list li {
+    font-size: 0.92rem;
+    color: #333;
+    line-height: 1.6;
+    margin-bottom: 0.2rem;
+}
+
+/* ===== Showcase / A/B cards ===== */
+.show-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 1rem;
+    height: 100%;
+}
+.show-card-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 0.4rem !important;
+}
+.show-card-tag {
+    display: inline-block;
+    background: #003E8C;
+    color: #ffffff;
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-weight: 600;
+    margin-left: 0.4em;
+    vertical-align: middle;
+}
+.show-card-narr {
+    font-size: 0.92rem;
+    color: #444;
+    line-height: 1.55;
+    margin-bottom: 0.7rem !important;
+}
+.show-card video {
+    width: 100%;
+    border-radius: 4px;
+    background: #000;
+}
+
+/* ===== Quant table ===== */
+.result-table {
+    border-collapse: collapse;
+    margin-top: 1rem;
+    font-size: 0.95rem;
+}
+.result-table th, .result-table td {
+    padding: 8px 12px !important;
+}
+.result-table thead th {
+    border-bottom: 2px solid #003E8C !important;
+    background: #f6f8fa !important;
+    font-weight: 600;
+}
+
+/* ===== BibTeX ===== */
+section#bibtex pre {
+    background: #f6f8fa !important;
+    border: 1px solid #d0d7de !important;
+    border-radius: 6px;
+    padding: 16px;
+    font-family: 'Roboto Mono', 'Source Code Pro', monospace;
+    font-size: 0.88rem;
+    color: #24292f;
+    white-space: pre;
+    overflow-x: auto;
+    line-height: 1.6;
+}
+
+/* ===== Teaser video ===== */
+.teaser .hero-body {
+    padding: 1.5rem;
+}
+
+/* ===== Footer ===== */
+.footer {
+    background: #ffffff;
+    border-top: 1px solid #e2e8f0;
+    padding: 2rem 1rem;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+    .publication-title { font-size: 1.5rem !important; }
+    .publication-title-en { font-size: 0.9rem !important; }
+    .publication-links {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .publication-links .button {
+        width: 100%;
+        margin-bottom: 0.4rem;
+    }
+}
