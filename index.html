@@ -34,21 +34,30 @@
       <!-- ===== Author block ===== -->
       <div class="is-size-5 publication-authors">
         <span class="author-block">
-          <strong>金子杰</strong>
+          <a href="https://github.com/jinzijie-bupt" target="_blank" rel="noopener" class="author-link">
+            <strong>金子杰</strong>
+          </a>
           <span class="author-en">(Zijie Jin)</span><sup>1</sup>
         </span>
       </div>
       <div class="is-size-6 publication-authors mt-2">
         <span class="author-block has-text-grey">
-          指导教师：<strong>李擎 教授</strong>
+          指导教师：
+          <a href="https://aee.ustb.edu.cn/szdw/zdjs/zdh/2024-09-13/2.html" target="_blank" rel="noopener" class="author-link">
+            <strong>李擎 教授</strong>
+          </a>
           <span class="author-en">(Prof. Qing Li)</span><sup>1</sup>
         </span>
       </div>
       <div class="is-size-6 publication-authors mt-2">
         <span class="author-block">
           <sup>1</sup>
-          <strong style="color:#003E8C;">北京科技大学</strong>
-          自动化学院
+          <a href="https://www.ustb.edu.cn/" target="_blank" rel="noopener" class="author-link" style="color:#003E8C;">
+            <strong>北京科技大学</strong>
+          </a>
+          <a href="https://aee.ustb.edu.cn/" target="_blank" rel="noopener" class="author-link">
+            自动化学院
+          </a>
         </span>
       </div>
       <div class="is-size-7 publication-authors has-text-grey mt-1">
@@ -80,9 +89,9 @@
           </span>
         </span>
         <span class="link-block">
-          <a href="https://github.com/ZhaoJ9014/Anti-UAV" class="external-link button is-normal is-rounded is-dark" target="_blank" rel="noopener">
+          <a href="#datasets" class="external-link button is-normal is-rounded is-dark">
             <span class="icon"><i class="fas fa-database"></i></span>
-            <span>数据集 (Anti-UAV)</span>
+            <span>数据集 (4 个)</span>
           </a>
         </span>
         <span class="link-block">
@@ -386,6 +395,93 @@
     <p class="has-text-centered is-size-7 has-text-grey mt-2">
       All numbers are based on the IR evaluation protocol unless otherwise noted.
       DUT Anti-UAV (cross-domain RGB benchmark) results are reported in the paper.
+    </p>
+  </div>
+</section>
+
+
+<!-- ====================== DATASETS ====================== -->
+<section class="section" id="datasets" style="background:#f9fafb;">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">数据集 · Datasets</h2>
+    <p class="subtitle is-6 has-text-centered has-text-grey">
+      本文方法在 4 个公开无人机视觉跟踪基准上系统验证。
+    </p>
+    <div class="columns is-multiline mt-4">
+      <div class="column is-half">
+        <div class="dataset-card">
+          <h4 class="dataset-title">
+            <i class="fas fa-database has-text-grey"></i>
+            Anti-UAV
+            <span class="dataset-badge">RGB + IR</span>
+          </h4>
+          <p class="dataset-info">
+            中国科学院 Jiang 等人发布的多模态无人机基准。
+            160 段训练 / 67 段验证 / 91 段测试。
+            每段视频含可见光与红外两路同步采集，覆盖白天、夜晚、阴雨等多种场景。
+          </p>
+          <div class="dataset-links">
+            <a href="https://anti-uav.github.io/" target="_blank" rel="noopener">官方主页</a>
+            ·
+            <a href="https://github.com/ZhaoJ9014/Anti-UAV" target="_blank" rel="noopener">GitHub</a>
+          </div>
+        </div>
+      </div>
+      <div class="column is-half">
+        <div class="dataset-card">
+          <h4 class="dataset-title">
+            <i class="fas fa-database has-text-grey"></i>
+            Anti-UAV410
+            <span class="dataset-badge">IR · 长序列</span>
+          </h4>
+          <p class="dataset-info">
+            北京理工大学 Huang 等人发布的扩展红外基准。
+            410 段视频共约 438K 帧，平均序列长度超过 1000 帧，
+            对长时序跟踪与目标重检测能力提出更高要求。
+          </p>
+          <div class="dataset-links">
+            <a href="https://github.com/CSU-LZL/Anti-UAV410" target="_blank" rel="noopener">GitHub</a>
+            ·
+            <a href="https://arxiv.org/abs/2306.15767" target="_blank" rel="noopener">论文 (arXiv)</a>
+          </div>
+        </div>
+      </div>
+      <div class="column is-half">
+        <div class="dataset-card">
+          <h4 class="dataset-title">
+            <i class="fas fa-database has-text-grey"></i>
+            DUT Anti-UAV
+            <span class="dataset-badge">RGB · 跨域</span>
+          </h4>
+          <p class="dataset-info">
+            大连理工大学 Zhao 等人发布的纯可见光无人机数据集。
+            本文实验中作为零样本跨域评测集使用，反映模型对训练域外纯可见光场景的泛化能力。
+          </p>
+          <div class="dataset-links">
+            <a href="https://github.com/wangdongdut/DUT-Anti-UAV" target="_blank" rel="noopener">GitHub</a>
+          </div>
+        </div>
+      </div>
+      <div class="column is-half">
+        <div class="dataset-card">
+          <h4 class="dataset-title">
+            <i class="fas fa-database has-text-grey"></i>
+            CST Anti-UAV
+            <span class="dataset-badge" style="background:#d62728;">IR · 极小目标</span>
+          </h4>
+          <p class="dataset-info">
+            南昌航空大学 Xie 等人发布的复杂场景小目标基准。
+            220 段红外视频，目标平均像素面积低于图像总面积的万分之一，
+            是当前公开数据集中难度最高的红外无人机基准。
+          </p>
+          <div class="dataset-links">
+            <a href="https://github.com/xieyqdsh/CST-Anti-UAV" target="_blank" rel="noopener">GitHub</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="has-text-centered is-size-7 has-text-grey mt-3">
+      <em>如发现数据集链接失效，请优先访问数据集发布团队的最新主页。</em>
     </p>
   </div>
 </section>

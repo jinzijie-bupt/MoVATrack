@@ -23,8 +23,10 @@ body {
     font-style: italic;
     color: #666;
     font-size: 1.05rem !important;
-    margin-bottom: 1.5rem !important;
+    margin-top: 0.8rem !important;
+    margin-bottom: 1.8rem !important;
     font-weight: 400;
+    line-height: 1.5;
 }
 .publication-authors {
     margin-bottom: 0;
@@ -41,6 +43,16 @@ body {
 .publication-authors sup {
     color: #003E8C;
     font-weight: 600;
+}
+.author-link {
+    color: inherit !important;
+    text-decoration: none !important;
+    border-bottom: 1px dashed transparent;
+    transition: border-color 0.15s, color 0.15s;
+}
+.author-link:hover {
+    border-bottom-color: #003E8C;
+    color: #003E8C !important;
 }
 
 /* ===== Badges ===== */
@@ -220,6 +232,60 @@ section#bibtex pre {
 /* ===== Teaser video ===== */
 .teaser .hero-body {
     padding: 1.5rem;
+}
+
+/* ===== Dataset cards ===== */
+.dataset-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 1.1rem 1.3rem;
+    height: 100%;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.dataset-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(0, 62, 140, 0.08);
+}
+.dataset-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0 0 0.5rem 0;
+}
+.dataset-title i {
+    margin-right: 6px;
+    font-size: 0.95em;
+}
+.dataset-badge {
+    display: inline-block;
+    background: #003E8C;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    margin-left: 0.4em;
+    vertical-align: middle;
+}
+.dataset-info {
+    font-size: 0.92rem;
+    color: #444;
+    line-height: 1.55;
+    margin: 0 0 0.7rem 0;
+}
+.dataset-links {
+    font-size: 0.9rem;
+}
+.dataset-links a {
+    color: #003E8C;
+    text-decoration: none;
+    margin: 0 4px;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s;
+}
+.dataset-links a:hover {
+    border-bottom-color: #003E8C;
 }
 
 /* ===== Footer ===== */
