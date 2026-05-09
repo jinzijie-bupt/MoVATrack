@@ -95,10 +95,10 @@
           </a>
         </span>
         <span class="link-block">
-          <span class="external-link button is-normal is-rounded is-static" title="Hugging Face Space 部署中">
+          <a href="https://huggingface.co/spaces/jin-bupt/MoVATrack" target="_blank" rel="noopener" class="external-link button is-normal is-rounded">
             <span class="icon"><i class="fas fa-rocket"></i></span>
-            <span><b>在线 Demo · 即将上线</b></span>
-          </span>
+            <span><b>在线 Demo</b></span>
+          </a>
         </span>
         <span class="link-block">
           <a href="#bibtex" class="external-link button is-normal is-rounded is-dark">
@@ -108,8 +108,9 @@
         </span>
       </div>
       <p class="is-size-7 has-text-grey mt-3">
-        <em>本页为本科毕业设计项目主页。论文与代码将在答辩后整理公开；
-        Demo 与模型权重计划于答辩前后部署。</em>
+        <em>本页为本科毕业设计项目主页。在线 Demo 已上线（ZeroGPU A100 burst，
+        支持 RGB+IR 双模态 / 仅 RGB / 仅 IR 三种模式 + MGTR 超参在线调节 +
+        模态退化压测）；论文 PDF、代码与模型权重将在答辩后整理公开。</em>
       </p>
     </div>
   </div>
@@ -286,6 +287,26 @@
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+
+<!-- ====================== TRY LIVE DEMO ====================== -->
+<section class="section" style="background:linear-gradient(180deg,#003E8C 0%,#002a63 100%);color:#fff;">
+  <div class="container is-max-desktop has-text-centered">
+    <h2 class="title is-3" style="color:#fff;">在线 Demo · 现在就试一试</h2>
+    <p class="subtitle is-6" style="color:#cdd9ee;">
+      上传一对 RGB + IR 视频与起始 bbox &middot; ZeroGPU A100 burst &middot; 单次最长 30 秒 &middot; 浏览器内即可使用
+    </p>
+    <p style="color:#e6edf7;max-width:720px;margin:1.2rem auto;font-size:0.95rem;line-height:1.7;">
+      <b>三种模式</b>：RGB+IR 双模态融合 · 仅 RGB · 仅 IR &nbsp;&nbsp;|&nbsp;&nbsp;
+      <b>在线超参调节</b>：τ<sub>absent</sub> · β · 一键关闭 MGTR &nbsp;&nbsp;|&nbsp;&nbsp;
+      <b>模态退化压测</b>：高斯噪声 · 随机黑帧 · 验证 VAAF 鲁棒性
+    </p>
+    <a href="https://huggingface.co/spaces/jin-bupt/MoVATrack" target="_blank" rel="noopener"
+       style="display:inline-block;padding:0.9rem 2.4rem;background:#fff;color:#003E8C;border-radius:6px;font-weight:700;font-size:1.05rem;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,0.15);">
+      🚁 前往 Hugging Face Space 体验 →
+    </a>
   </div>
 </section>
 

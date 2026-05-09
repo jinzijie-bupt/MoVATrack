@@ -7,6 +7,7 @@
 *Design of UAV Tracking Algorithm Based on Multi-modal Image Information Fusion*
 
 [![Project Page](https://img.shields.io/badge/Project-Page-blue)](https://jinzijie-bupt.github.io/MoVATrack/)
+[![Live Demo](https://img.shields.io/badge/🤗_Spaces-Live_Demo-yellow)](https://huggingface.co/spaces/jin-bupt/MoVATrack)
 [![Status](https://img.shields.io/badge/Status-WIP-orange)](https://github.com/jinzijie-bupt/MoVATrack)
 [![License](https://img.shields.io/badge/License-CC--BY--NC--4.0-green)](#license)
 
@@ -14,7 +15,7 @@
 **[北京科技大学](https://www.ustb.edu.cn/) · [自动化学院](https://saee.ustb.edu.cn/)**
 *本科毕业设计（论文）· 2026 届*
 
-[🌐 在线项目主页](https://jinzijie-bupt.github.io/MoVATrack/)
+[🌐 在线项目主页](https://jinzijie-bupt.github.io/MoVATrack/) &nbsp;|&nbsp; [🤗 在线 Demo (HF Space)](https://huggingface.co/spaces/jin-bupt/MoVATrack)
 
 </div>
 
@@ -57,8 +58,9 @@
 └── README.md           本文档
 ```
 
-**论文 PDF**、**完整代码**、**模型权重**与**在线 Demo (HF Space)** 将随论文进展逐步公开，
-当前以占位徽章呈现。
+**在线 Demo** 已上线于 [Hugging Face Space](https://huggingface.co/spaces/jin-bupt/MoVATrack)
+（ZeroGPU A100 burst，支持 RGB+IR 双模态 / 仅 RGB / 仅 IR 三种模式 + MGTR 超参在线调节 + 模态退化压测）；
+**论文 PDF**、**完整代码**与**模型权重**将随论文进展逐步公开。
 
 ## 数据集
 
