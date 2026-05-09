@@ -67,9 +67,9 @@
 | 数据集 | 模态 | 发布机构 | 项目链接 |
 |---|---|---|---|
 | Anti-UAV | RGB + IR | 中国科学院 | [官方主页](https://anti-uav.github.io/) · [GitHub](https://github.com/ZhaoJ9014/Anti-UAV) |
-| Anti-UAV410 | IR | 北京理工大学 | [GitHub](https://github.com/CSU-LZL/Anti-UAV410) · [arXiv](https://arxiv.org/abs/2306.15767) |
+| Anti-UAV410 | IR | 北京理工大学 | [下载 (官方仓库)](https://github.com/ZhaoJ9014/Anti-UAV) · [arXiv](https://arxiv.org/abs/2306.15767) |
 | DUT Anti-UAV | RGB | 大连理工大学 | [GitHub](https://github.com/wangdongdut/DUT-Anti-UAV) |
-| CST Anti-UAV | IR | 南昌航空大学 | [GitHub](https://github.com/xieyqdsh/CST-Anti-UAV) |
+| CST Anti-UAV | IR | 南昌航空大学 | [GitHub](https://github.com/PCwenyue/CST-Anti-UAV) |
 
 ## 引用
 
